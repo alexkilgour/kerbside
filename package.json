@@ -1,0 +1,23 @@
+{
+  "name": "kerbside",
+  "version": "1.0.0",
+  "description": "Get the traders from various kerb locations in London",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexkilgour/kerbside.git"
+  },
+  "author": "Alex Kilgour",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexkilgour/kerbside/issues"
+  },
+  "homepage": "https://github.com/alexkilgour/kerbside#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "got": "^9.6.0"
+  }
+}
