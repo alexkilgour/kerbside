@@ -1,10 +1,12 @@
 const cheerio = require('cheerio');
 const got = require('got');
 
+const locations = ['kings-cross', 'gherkin', 'st-kats', 'west-india-quay'];
+
 // Grab the HTML
 const getHTML = async () => {
 	try {
-		return await got('kings-cross', {baseUrl: 'http://www.kerbfood.com/markets'});
+		return await got(locations[0], {baseUrl: 'http://www.kerbfood.com/markets'});
 	} catch (error) {
 		console.log(error.response.body);
 	}
