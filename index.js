@@ -2,20 +2,34 @@ const cheerio = require('cheerio');
 const got = require('got');
 
 const locations = ['kings-cross', 'gherkin', 'st-kats', 'west-india-quay'];
+const json = {data: []};
 
-// Grab the HTML
-const getHTML = async () => {
+// Get the locations
+const getLocations = () => {
+	return locations;
+};
+
+// Get the HTML
+const getHTML = async location => {
 	try {
-		return await got(locations[0], {baseUrl: 'http://www.kerbfood.com/markets'});
+		if (!locations[location]) {
+			console.log('Error: Invalid location number');
+			return null;
+		}
+		json.location = locations[location];
+		return await got(locations[location], {baseUrl: 'http://www.kerbfood.com/markets'});
 	} catch (error) {
-		console.log(error.response.body);
+		if (error.response.statusCode && error.response.statusMessage) {
+			console.error(`${error.response.statusCode}: ${error.response.statusMessage}`);
+		} else {
+			console.error(error);
+		}
 	}
 }
 
 // Create trader list
 const createTraders = async data => {
 	const $ = cheerio.load(data);
-	const json = {data: []};
 	const $container = $('.traders-list--wrap .royalSlider.traders-carousel');
 	
 	$container.find($('.rsContent')).each(function () {
@@ -35,9 +49,10 @@ const createTraders = async data => {
 	return json;
 }
 
-// Run
-getHTML()
-	.then(res => createTraders(res.body))
-		.then(res => {
-			console.log(JSON.stringify(res, null, 2));
-		});
+const main = async location => {
+	const response = await getHTML(location);
+	return (response) ? await createTraders(response.body) : json;
+}
+
+module.exports.traders = main;
+module.exports.locations = getLocations;

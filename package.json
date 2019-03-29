@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Get the traders from various kerb locations in London",
   "main": "index.js",
+  "bin": "bin/kerbside",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,8 +18,10 @@
   },
   "homepage": "https://github.com/alexkilgour/kerbside#readme",
   "dependencies": {
+    "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.2",
     "got": "^9.6.0",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "moment-timezone": "^0.5.23"
   }
 }
