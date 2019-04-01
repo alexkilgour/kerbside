@@ -1,0 +1,1 @@
+alias kerb="../bin/kerbside"
