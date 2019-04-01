@@ -1,7 +1,7 @@
 # kerbside
 Get the traders from various kerb locations
 
-```sh
+```
 USAGE
     kerbside <args>
       -l, --location <n>    Location number (default: 0)
