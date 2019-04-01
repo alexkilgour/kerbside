@@ -1,7 +1,5 @@
 local PLUGIN_DIR="$( cd "$( dirname "${(%):-%x}" )" && pwd )"
 
-function kerbside(){
-    echo $PLUGIN_DIR
-}
+$( cd "$PLUGIN_DIR" && npm install )
 
-alias kerb="$PLUGIN_DIR/npm i; $PLUGIN_DIR/bin/kerbside"
+alias kerb="$PLUGIN_DIR/bin/kerbside"
