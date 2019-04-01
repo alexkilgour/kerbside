@@ -45,10 +45,16 @@ function printResults (json) {
 };
 
 // format the JSON based on args
-function formatJson (json, days, today) {
+function formatJson (json, days, today, location) {
 	if (today) {
 		const today = moment().tz('Europe/London').format('dddd Do MMMM');
 		const todayData = json.data.find(o => o.date === today);
+
+		if (!todayData) {
+			console.log(`Sorry, we couldn\'t find any traders for today at ${locations[location]}`);
+			process.exit();
+		}
+
 		return {
 			data: [todayData],
 			location: json.location
@@ -76,17 +82,17 @@ function locationsToString (locations) {
 
 // Print the help
 if (args.help) {
-	console.log(help)
-	process.exit()
+	console.log(help);
+	process.exit();
 }
 
 kerbside.traders(args.location).then(results => {
 	if (results && results.data.length === 0) {
 		console.log(`Sorry, we couldn\'t find any traders for ${locations[args.location]}`);
 	} else {
-		const formattedJson = formatJson(results, args.days, args.today);
+		const formattedJson = formatJson(results, args.days, args.today, args.location);
 		if (args.json) {
-			console.log(formattedJson);
+			console.log(JSON.stringify(formattedJson, undefined, 2));
 		} else {
 			printResults(formattedJson);
 		}
