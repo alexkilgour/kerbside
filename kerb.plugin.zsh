@@ -4,4 +4,4 @@ function kerbside(){
     echo $PLUGIN_DIR
 }
 
-alias kerb="$PLUGIN_DIR/bin/kerbside"
+alias kerb="$PLUGIN_DIR/npm i; $PLUGIN_DIR/bin/kerbside"
